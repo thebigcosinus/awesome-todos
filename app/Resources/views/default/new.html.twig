@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{#
+    {% form_theme form 'jquery.collection.html.twig'  %}
+#}
+
+    {% form_theme form _self %}
+    {% block integer_widget %}
+        <div class="integer_widget">
+            {% set type = type|default('number') %}
+            {{ block('form_widget_simple') }}
+        </div>
+    {% endblock %}
+
+    {% block _task_descritpion_widget %}
+        <div class="text_widget fabien">
+            {{ block('form_widget_simple') }}
+        </div>
+    {% endblock %}
+
+{{ form_start(form, {'attr' :{'novalidate':'novalidate'}, 'action':path('new_route'), 'method':'POST'}) }}
+    <div class="form-group">
+        {{ form_label(form.isActive) }}
+        {{ form_errors(form.isActive) }}
+        {{ form_widget(form.isActive) }}
+    </div>
+
+        {{ form_widget(form.description) }}
+
+    <h3>Category</h3>
+    <div class="category">
+        {{ form_row(form.category.name) }}
+    </div>
+    <h3>Labels</h3>
+    <ul class="labels" data-prototype="{{ form_widget(form.label.vars.prototype)|e('html_attr') }}">
+        {% for label in form.label %}
+            <li>{{ form_row(label.name) }}</li>
+        {% endfor %}
+    </ul>
+{{ form_widget(form) }}
+{{ form_end(form) }}
+
+<script type="text/javascript">
+    jQuery('.my-selector').collection({
+         up: '<a href="#">&#x25B2;</a>',
+         down: '<a href="#">&#x25BC;</a>',
+         add: '<a href="#">[ + ]</a>',
+         remove: '<a href="#">[ - ]</a>',
+         duplicate: '<a href="#">[ # ]</a>',
+         allow_up: false,
+         allow_down: false,
+         prototype_name: '{{ form.label.vars.prototype.vars.name }}',
+        allow_add: true,
+        allow_remove: true,
+        name_prefix:  '{{ form.label.vars.full_name }}',
+         init_with_n_elements: 5,
+         add_at_the_end: true,
+         min:1,
+         max:10
+     });
+</script>
+{#    <script>
+    var $collectionHolder;
+
+    var $addLabelLink = $('<a href="#" class="add_tag_link">Add a tag</a>');
+    var $newLinkli = $('<li></li>').append($addLabelLink);
+
+     jQuery(document).ready(function() {
+     console.log('toto');
+        $collectionHolder = $('ul.labels');
+        $collectionHolder.append($newLinkli);
+
+        $collectionHolder.find('li').each(function() {
+            addLabelFormDeleteLink($(this));
+        });
+
+        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+        $addLabelLink.on('click', function(e) {
+            e.preventDefault();
+
+            addLabelForm($collectionHolder, $newLinkli);
+            addLabelFormDeleteLink();
+        });
+
+        function addLabelFormDeleteLink($labelFormLi) {
+             var $removeFormA = $('<a href="#">delete this label</a>');
+             $labelFormLi.append($removeFormA);
+             $removeFormA.on('click', function(e) {
+                e.preventDefault();
+                $labelFormLi.remove();
+             });
+        }
+
+
+        function addLabelForm($collectionHolder, $newLinkLi) {
+            var prototype = $collectionHolder.data('prototype');
+
+            var index = $collectionHolder.data('index');
+
+            var newForm = prototype.replace(/__name__/g, index);
+
+            $collectionHolder.data('index', index+1);
+
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkli.before($newFormLi);
+        }
+     });
+
+</script>#}
+{% endblock %}

@@ -1,0 +1,88 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
+            cost: 12
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+#        webservice:
+#            id: app.webservice_user_provider
+#        apikey_provider:
+#            id: app.api_key_user_provider
+        my_db_provider:
+            entity:
+                class: AppBundle:User
+                #property: username
+        api_db_provider:
+            entity:
+                class: AppBundle:User
+                property: apiKey
+        in_memory:
+            memory:
+                users:
+                    ryan:
+                        password: $2y$12$fc14DPQ/2ewzJ3d2FCrJQuZnjPmKGCbE1QGMnsvtm1RqtYlDaDJia
+                        roles: 'ROLE_USER'
+                    admin:
+                        password: $2y$12$RZZLdf5Jnylx4z6W3cjMV.vCwaajIBVqoyRCjYv0Yw5HRa5vNPVPu
+                        roles: 'ROLE_ADMIN'
+        chain_provider:
+            chain:
+                providers: [my_db_provider, in_memory]
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+#        secured_area:
+#            pattern: ^/api
+#            #stateless: True,
+#            simple_preauth:
+#                authenticator: app.app.apikey_authenticator
+#            provider: api_key_user_provider
+        main:
+            switch_user: true
+            anonymous: ~
+            http_basic:
+                realm: 'Secured Demo Area'
+                provider: in_memory
+            guard:
+                authenticators:
+                    - app.token_authenticator
+            form_login:
+                login_path: login
+                check_path: login
+                csrf_token_generator: security.csrf.token_manager
+                csrf_parameter: _csrf_security_token
+                csrf_token_id: authenticate
+                username_parameter: _username
+                password_parameter: _password
+                post_only: true
+                use_forward: false
+                provider: chain_provider
+            logout:
+                path: /logout
+                target: /login
+            remember_me:
+                secret: '%secret%'
+                lifetime: 604800
+                path: /
+                name: 'amazingtodosrememberme'
+    access_control:
+        - {path: ^/api, roles: ROLE_API }
+        - {path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - {path: ^/admin/users, roles: ROLE_SUPER_ADMIN }
+        - {path: ^/admin/, roles: ROLE_ADMIN }
+        - {path: ^/, roles: ROLE_USER}
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+    access_decision_manager:
+        strategy: unanimous

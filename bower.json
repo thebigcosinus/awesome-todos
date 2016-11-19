@@ -1,0 +1,23 @@
+{
+  "name": "forms",
+  "authors": [
+    "Fabien GAUBERT <fabien.gaubert@orange.com>"
+  ],
+  "description": "",
+  "directory": "web/assets/vendor/",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "symfony-collection": "https://github.com/ninsuo/symfony-collection.git#^2.0.4",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1"
+  }
+}

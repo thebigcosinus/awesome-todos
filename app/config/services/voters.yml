@@ -1,0 +1,7 @@
+services:
+    app.post_voters:
+        class: AppBundle\Security\Voters\PostVoter
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - {name: security.voter}
+        public: false
