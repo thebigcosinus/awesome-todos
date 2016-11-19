@@ -3,8 +3,8 @@
 namespace AppBundle\Controller;
 
 
-use AppBundle\AppBundle;
 use AppBundle\Entity\Todo;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -64,11 +64,12 @@ class TodoController extends Controller
 
     /**
      * @Route("/todos/details/{id}", name="todo_details")
+     * @ParamConverter("todo", class="AppBundle:Todo")
      */
-    public function detailsAction($id, Request $request)
+    public function detailsAction(Todo $todo, Request $request)
     {
-        $todo = $this->getDoctrine()->getRepository('AppBundle:Todo')
-            ->find($id);
+        /*$todo = $this->getDoctrine()->getRepository('AppBundle:Todo')
+            ->find($id);*/
 
         return $this->render(
             'todo/details.html.twig',
@@ -81,11 +82,12 @@ class TodoController extends Controller
 
     /**
      * @route("/todos/edit/{id}", name="todo_edit")
+     * @ParamConverter("todo", class="AppBundle:Todo")
      */
-    public function editAction($id, Request $request) {
+    public function editAction(Todo $todo, Request $request) {
         $new  = new \DateTime('now');
 
-        $todo = $this->getDoctrine()->getRepository('AppBundle:Todo')->find($id);
+        //$todo = $this->getDoctrine()->getRepository('AppBundle:Todo')->find($id);
 
         $todo->setCreateDate(new \DateTime());
 
@@ -124,10 +126,11 @@ class TodoController extends Controller
     /**
      * @param $id
      * @route("/todos/delete/{id}", name="todo_delete")
+     * @ParamConverter("todo",class="AppBundle:Todo")
      */
-    public function deleteAction($id) {
+    public function deleteAction(Todo $todo) {
         $em = $this->getDoctrine()->getManager();
-        $todo = $em->getRepository('AppBundle:Todo')->find($id);
+        //$todo = $em->getRepository('AppBundle:Todo')->find($id);
 
         $em->remove($todo);
         $em->flush();
