@@ -27,9 +27,9 @@ class AppExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
 
-        $loader = new YamlFileLoader($container, new FileLocator('/home/fabien/symfony/forms/app/config/'));
+        #$loader = new YamlFileLoader($container, new FileLocator("%kernel.root_dir%/config/"));
 
-        $loader->load('services/voters.yml');
+        #$loader->load('services/voters.yml');
 
     }
 }
