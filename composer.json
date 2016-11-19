@@ -1,6 +1,7 @@
 {
     "name": "fabien/forms",
     "license": "proprietary",
+    "description": "App Todo Test Symfony3",
     "type": "project",
     "autoload": {
         "psr-4": {
