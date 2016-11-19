@@ -85,7 +85,7 @@ class DefaultController extends Controller
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      *
      */
-    public function testRoute()
+    public function testAction()
     {
         return new Response('Fomulaire valide');
     }
