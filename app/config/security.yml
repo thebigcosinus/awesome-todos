@@ -53,9 +53,9 @@ security:
         main:
             switch_user: true
             anonymous: ~
-            http_basic:
-                realm: 'Secured Demo Area'
-                provider: in_memory
+#            http_basic:
+#                realm: 'Secured Demo Area'
+#                provider: in_memory
             guard:
                 authenticators:
                     - app.token_authenticator

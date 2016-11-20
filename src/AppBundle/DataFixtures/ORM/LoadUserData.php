@@ -26,7 +26,13 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
      */
     public function load(ObjectManager $manager)
     {
-        $listNames = array('Fabien'=>array('ROLE_ADMIN', 'ROLE_USER'), 'Aline'=> array('ROLE_USER'), 'Sophie'=>array('ROLE_USER'), 'admin'=>array('ROLE_ADMIN'));
+        $listNames = array(
+            'Fabien' => array('ROLE_ADMIN', 'ROLE_USER'),
+            'Aline' => array('ROLE_USER'),
+            'Sophie' => array('ROLE_USER'),
+            'admin' => array('ROLE_ADMIN'),
+            'god' => array('ROLE_SUPER_ADMIN')
+        );
 
         $encoder = $this->container->get('security.password_encoder');
 
@@ -39,7 +45,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
 
             $user->setEmail($name.'@localhost');
 
-            
+
             $user->setIsActive(true);
 
             $user->setRoles($roles);
