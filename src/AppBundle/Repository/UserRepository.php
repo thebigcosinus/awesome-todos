@@ -4,7 +4,6 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * UserRepository
