@@ -4,7 +4,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
@@ -53,9 +52,21 @@ class User implements AdvancedUserInterface, \Serializable
 
     /**
      * @var
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
      */
     private $apiKey;
+
+    /**
+     * @var
+     * @ORM\Column(name="salt", type="string", length=255)
+     */
+    private $salt;
+
+    /**
+     * @var array
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles = array();
 
     /**
      * User constructor.
@@ -290,5 +301,32 @@ class User implements AdvancedUserInterface, \Serializable
     public function getLocale() {
         return 'fr';
     }
-}
 
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     *
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Set roles
+     *
+     * @param array $roles
+     *
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+}
