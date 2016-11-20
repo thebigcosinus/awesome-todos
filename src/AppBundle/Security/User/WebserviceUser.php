@@ -115,7 +115,7 @@ class WebserviceUser implements UserInterface, EquatableInterface
      */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+        
     }
 
     /**
