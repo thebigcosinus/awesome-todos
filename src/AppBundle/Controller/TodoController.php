@@ -79,18 +79,17 @@ class TodoController extends Controller
      * @ParamConverter("todo", class="AppBundle:Todo")
      */
     public function editAction(Todo $todo, Request $request) {
-        $new  = new \DateTime('now');
-
-        //$todo = $this->getDoctrine()->getRepository('AppBundle:Todo')->find($id);
-
-        $todo->setCreateDate(new \DateTime());
 
         $form = $this->createForm(TodoType::class, $todo);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Todo $todo */
             $todo = $form->getData();
+
+            $todo->setUpdatedAt(new \DateTime());
+            
             $em = $this->getDoctrine()->getManager();
 
             $em->flush();

@@ -11,6 +11,7 @@ namespace AppBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Traits\TimestampableTrait;
 
 /**
  * Category
@@ -20,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
-
+    use TimestampableTrait;
     /**
      * @var int
      *
@@ -44,6 +45,10 @@ class Category
      */
     protected $owner;
 
+    public function __construct()
+    {
+        $this->createdAt = $this->updatedAt = new \DateTime();
+    }
 
     /**
      * @return mixed

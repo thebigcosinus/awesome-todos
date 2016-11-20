@@ -94,7 +94,10 @@ class CategoryController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            /** @var Category $category */
             $category = $form->getData();
+
+            $category->setUpdatedAt(new \DateTime());
 
             $em = $this->getDoctrine()->getEntityManager();
 

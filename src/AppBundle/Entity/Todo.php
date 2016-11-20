@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -13,6 +14,8 @@ use Symfony\Component\Validator\Constraints\DateTime;
  */
 class Todo
 {
+    use TimestampableTrait;
+
     /**
      * @var int
      *
@@ -46,13 +49,7 @@ class Todo
      * @ORM\Column(name="due_date", type="datetime")
      */
     private $dueDate;
-
-    /**
-     * @var \DateTime
-     * @ORM\Column(name="create_date", type="datetime")
-     */
-    private $createDate;
-
+    
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
@@ -80,7 +77,8 @@ class Todo
 
     public function __construct()
     {
-        $this->createDate = new \DateTime();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     /**
@@ -179,26 +177,5 @@ class Todo
         return $this->dueDate;
     }
 
-    /**
-     * Set createDate
-     *
-     * @param \DateTime $createDate
-     * @return Todo
-     */
-    public function setCreateDate($createDate)
-    {
-        $this->createDate = $createDate;
-
-        return $this;
-    }
-
-    /**
-     * Get createDate
-     * @return \DateTime
-     */
-    public function getCreateDate()
-    {
-        return $this->createDate;
-    }
 }
 
