@@ -3,3 +3,6 @@ app:
     type:     annotation
 logout:
     path: /logout
+coresphere_console:
+    resource: .
+    type: extra

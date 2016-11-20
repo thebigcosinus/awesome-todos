@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LoadUserData implements FixtureInterface, ContainerAwareInterface
 {
-
+    /** @var  ContainerInterface $container */
     private $container;
 
     /**
@@ -26,16 +26,19 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
      */
     public function load(ObjectManager $manager)
     {
-        $listNames = array('Fabien'=>array('ROLE_ADMIN', 'ROLE_USER'), 'Aline'=> array('ROLE_USER'), 'Sophie'=>array('ROLE_USER'));
+        $listNames = array('Fabien'=>array('ROLE_ADMIN', 'ROLE_USER'), 'Aline'=> array('ROLE_USER'), 'Sophie'=>array('ROLE_USER'), 'admin'=>array('ROLE_ADMIN'));
+
+        $encoder = $this->container->get('security.password_encoder');
 
         foreach ($listNames as $name => $roles) {
             $user = new User();
 
             $user->setUsername($name);
-            $user->setPassword($name);
+
+            $user->setPassword($encoder->encodePassword($user, $name));
+
             $user->setEmail($name.'@localhost');
 
-            $user->setSalt('');
             
             $user->setIsActive(true);
 

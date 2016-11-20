@@ -33,6 +33,9 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="/todos/create">Create</a></li>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <li><a href="/_console">Console</a></li>
+                    {% endif %}
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

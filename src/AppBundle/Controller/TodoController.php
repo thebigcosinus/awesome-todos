@@ -48,7 +48,9 @@ class TodoController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Todo $todo */
             $todo = $form->getData();
+            $todo->setCreator($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($todo);
             $em->flush();

@@ -32,6 +32,9 @@ security:
                     admin:
                         password: $2y$12$RZZLdf5Jnylx4z6W3cjMV.vCwaajIBVqoyRCjYv0Yw5HRa5vNPVPu
                         roles: 'ROLE_ADMIN'
+                    god:
+                        password: $2y$12$T5dJQCQqE01R57fOVuBLX.wJ9ARTnCyHZdLgVAD./bam6VeHdsrDW
+                        roles: 'ROLE_SUPER_ADMIN'
         chain_provider:
             chain:
                 providers: [my_db_provider, in_memory]
@@ -66,7 +69,7 @@ security:
                 password_parameter: _password
                 post_only: true
                 use_forward: false
-                provider: chain_provider
+                provider: my_db_provider
             logout:
                 path: /logout
                 target: /login
@@ -76,6 +79,7 @@ security:
                 path: /
                 name: 'amazingtodosrememberme'
     access_control:
+        - {path: ^/_console, roles: ROLE_SUPER_ADMIN}
         - {path: ^/api, roles: ROLE_API }
         - {path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - {path: ^/admin/users, roles: ROLE_SUPER_ADMIN }

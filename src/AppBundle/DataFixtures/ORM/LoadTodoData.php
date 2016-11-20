@@ -21,7 +21,7 @@ class LoadTodoData implements FixtureInterface
      * @return mixed
      */
     public function load(ObjectManager $manager)
-    {
+    { return;
         $todo =  new Todo();
 
         $todo->setName("Todo1");

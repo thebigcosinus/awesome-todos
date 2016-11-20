@@ -53,6 +53,31 @@ class Todo
      */
     private $createDate;
 
+    /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $creator;
+
+    /**
+     * @return mixed
+     */
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+
+    /**
+     * @param mixed $creator
+     */
+    public function setCreator(User $creator)
+    {
+        $this->creator = $creator;
+
+        return $this;
+    }
+
     public function __construct()
     {
         $this->createDate = new \DateTime();
