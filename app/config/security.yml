@@ -24,17 +24,17 @@ security:
                 class: AppBundle:User
                 property: apiKey
         in_memory:
-            memory:
-                users:
-                    ryan:
-                        password: $2y$12$fc14DPQ/2ewzJ3d2FCrJQuZnjPmKGCbE1QGMnsvtm1RqtYlDaDJia
-                        roles: 'ROLE_USER'
-                    admin:
-                        password: $2y$12$RZZLdf5Jnylx4z6W3cjMV.vCwaajIBVqoyRCjYv0Yw5HRa5vNPVPu
-                        roles: 'ROLE_ADMIN'
-                    god:
-                        password: $2y$12$T5dJQCQqE01R57fOVuBLX.wJ9ARTnCyHZdLgVAD./bam6VeHdsrDW
-                        roles: 'ROLE_SUPER_ADMIN'
+            memory: ~
+#                users:
+#                    ryan:
+#                        password: $2y$12$fc14DPQ/2ewzJ3d2FCrJQuZnjPmKGCbE1QGMnsvtm1RqtYlDaDJia
+#                        roles: 'ROLE_USER'
+#                    admin:
+#                        password: $2y$12$RZZLdf5Jnylx4z6W3cjMV.vCwaajIBVqoyRCjYv0Yw5HRa5vNPVPu
+#                        roles: 'ROLE_ADMIN'
+#                    god:
+#                        password: $2y$12$T5dJQCQqE01R57fOVuBLX.wJ9ARTnCyHZdLgVAD./bam6VeHdsrDW
+#                        roles: 'ROLE_SUPER_ADMIN'
         chain_provider:
             chain:
                 providers: [my_db_provider, in_memory]
