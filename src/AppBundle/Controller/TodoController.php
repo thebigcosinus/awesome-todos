@@ -4,7 +4,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Todo;
-use AppBundle\Form\TodoType;
+use AppBundle\Form\Type\TodoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
