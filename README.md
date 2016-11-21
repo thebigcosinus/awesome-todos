@@ -1,6 +1,11 @@
 Awesome-todos
 =====
 
+Projet de Test de Symfony3 dans le but de réaliser un systè de TodoList en utilisant les outils d'intégation continu
+Travis CI
+Sensio Insight
+
+
 A Symfony project created on November 15, 2016, 8:16 pm.
 
 [![Build Status](https://travis-ci.org/thebigcosinus/awesome-todos.svg?branch=develop)](https://travis-ci.org/thebigcosinus/awesome-todos)
