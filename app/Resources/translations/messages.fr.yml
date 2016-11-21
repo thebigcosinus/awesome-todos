@@ -1,0 +1,42 @@
+menu.todos: Tâches
+menu.categories: Catégories
+menu.console: Console
+
+todo:
+    notice:
+        added_success: Tâche ajoutée avec succès
+        updated_success: Tâche mise à jour avec succès
+        removed_success: Tâche supprimée avec succès
+    button:
+        back_to_todos: Retour à la liste
+        add_todo: Ajouter une tâche
+    edit:
+        title: Editer la tâche
+    add:
+        title: Ajouter une tâche
+    label:
+        category: Categorie :
+        due_date: Avant :
+        description: Description :
+    list:
+        todo: Tâche
+        due_date: Avant
+        actions: Actions
+    actions:
+        view: Voir
+        edit: Modifier
+        delete: Supprimer
+
+category:
+    notice:
+        added_success: Catégorie ajoutée
+        deleted_success: Catégorie supprimée
+        updated_success: Catégorie modifiée
+    actions:
+        delete: Supprimer
+        edit: Modifier
+    button:
+        add_category: Ajouter une catégorie
+    list:
+        category: Catégorie
+        actions: Actions

@@ -1,14 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div>
+        <a href="{{ path('todo_create') }}" class="btn btn-default">{{ 'todo.button.add_todo' | trans }}</a>
+    </div>
+
     <table class="table table-bordered">
         <thead>
         <tr>
             <th>#</th>
             <th>Todo</th>
-            <th>Assigned Date</th>
-            <th>Due Date</th>
-            <th>Actions</th>
+            <th>{{ "todo.list.todo"| trans }}</th>
+            <th>{{ "todo.list.due_date"| trans }}</th>
+            <th>{{ "todo.list.actions" | trans }}</th>
         </tr>
         </thead>
         <tbody>
@@ -19,9 +23,9 @@
                 <td>{{todo.createdAt | date('F j, Y, g:i a')}}</td>
                 <td>{{todo.duedate | date('F j, Y, g:i a')}}</td>
                 <td>
-                    <a href="{{ path('todo_details', {'id': todo.id}) }}" class="btn btn-success">View</a>
-                    <a href="{{path('todo_edit', {'id': todo.id})}}" class="btn btn-default">Edit</a>
-                    <a href="{{ path('todo_delete', {'id': todo.id})}}" class="btn btn-danger">Delete</a>
+                    <a href="{{ path('todo_details', {'id': todo.id}) }}" class="btn btn-success">{{'todo.actions.view' |trans }}</a>
+                    <a href="{{path('todo_edit', {'id': todo.id})}}" class="btn btn-default">{{'todo.actions.edit' |trans }}</a>
+                    <a href="{{ path('todo_delete', {'id': todo.id})}}" class="btn btn-danger">{{'todo.actions.delete' |trans }}</a>
                 </td>
             </tr>
         {% endfor %}

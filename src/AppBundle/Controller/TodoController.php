@@ -31,6 +31,8 @@ class TodoController extends Controller
      */
     public function createAction(Request $request)
     {
+        $translator = $this->translator();
+
         $todo = new Todo();
 
         $form = $this->createForm(TodoType::class, $todo);
@@ -45,7 +47,7 @@ class TodoController extends Controller
             $em->persist($todo);
             $em->flush();
 
-            $this->addFlash('notice', 'Todo Added');
+            $this->addFlash('notice', $translator->trans('todo.notice.added_success'));
             return $this->redirectToRoute('todo_list');
         }
 
@@ -76,6 +78,8 @@ class TodoController extends Controller
      */
     public function editAction(Todo $todo, Request $request) {
 
+        $translator = $this->translator();
+
         $form = $this->createForm(TodoType::class, $todo);
 
         $form->handleRequest($request);
@@ -90,7 +94,7 @@ class TodoController extends Controller
 
             $em->flush();
 
-            $this->addFlash('notice', 'Todo updated');
+            $this->addFlash('notice', $translator->trans('todo.notice.updated_success'));
 
             return $this->redirectToRoute('todo_list');
         }
@@ -110,14 +114,20 @@ class TodoController extends Controller
      * @ParamConverter("todo",class="AppBundle:Todo")
      */
     public function deleteAction(Todo $todo) {
+        $translator = $this->translator();
         $em = $this->getDoctrine()->getManager();
 
         $em->remove($todo);
         
         $em->flush();
 
-        $this->addFlash('notice', 'Todo Removed');
+        $this->addFlash('notice', $translator->trans('todo.notice.remove_success'));
 
         return $this->redirectToRoute('todo_list');
+    }
+
+    private function translator()
+    {
+        return $this->get('translator');
     }
 }

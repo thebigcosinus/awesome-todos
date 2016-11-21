@@ -31,11 +31,10 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{ path('todo_list') }}">Todos</a></li>
-                    <li><a href="{{ path('todo_create') }}">Create</a></li>
-                    <li><a href="{{ path('category_list') }}">Category</a></li>
+                    <li class="active"><a href="{{ path('todo_list') }}">{{ 'menu.todos'| trans}}</a></li>
+                    <li><a href="{{ path('category_list') }}">{{ 'menu.categories'|trans }}</a></li>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
-                        <li><a href="/_console">Console</a></li>
+                        <li><a href="/_console">{{ 'menu.console'|trans }}</a></li>
                     {% endif %}
                 </ul>
             </div><!--/.nav-collapse -->

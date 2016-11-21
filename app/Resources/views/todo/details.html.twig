@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('todo_list') }}" class="btn btn-default">Back to Todos</a>
+    <a href="{{ path('todo_list') }}" class="btn btn-default">{{ 'todo.button.back_to_todos' | trans }}</a>
     <h2 class=page-header>{{todo.name}}</h2>
     <ul class="list-group">
-        <li class="list-group-item">Category : {{todo.category}}</li>
-        <li class="list-group-item>Description : {{todo.description}}</li>
-        <li class="list-group-item">Due: {{todo.duedate | date('F j, Y, g:i a')}}</li>
+        <li class="list-group-item">{{ "todo.label.category"|trans }} {{todo.category}}</li>
+        <li class="list-group-item">{{ "todo.label.description" | trans }} {{todo.description}}</li>
+        <li class="list-group-item">{{ "todo.label.due_date" | trans}} {{todo.duedate | date('F j, Y, g:i a')}}</li>
     </ul>
 {% endblock %}

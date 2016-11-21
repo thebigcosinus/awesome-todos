@@ -36,6 +36,8 @@ class CategoryController extends Controller
      */
     public function createAction(Request $request)
     {
+        $translator = $this->translator();
+
         $category = new Category();
         
         $form = $this->createForm(CategoryType::class, $category);
@@ -53,7 +55,7 @@ class CategoryController extends Controller
              $em->persist($category);
              $em->flush();
 
-             $this->addFlash("notice", 'Category added');
+             $this->addFlash("notice", $translator->trans('category.notice.added_success'));
 
              return $this->redirectToRoute('category_list');
          }
@@ -69,13 +71,14 @@ class CategoryController extends Controller
      */
     public function deleteAction(Category $category)
     {
+        $translator = $this->translator();
         $em =  $this->getDoctrine()->getEntityManager();
         
         $em->remove($category);
 
         $em-> flush();
 
-        $this->addFlash('notice', 'Category deleted');
+        $this->addFlash('notice', $translator->trans('category.notice.deleted_success'));
 
         return $this->redirectToRoute('category_list');
     }
@@ -88,6 +91,8 @@ class CategoryController extends Controller
      */
     public function editAction(Category $category, Request $request)
     {
+        $translator = $this->translator();
+
         $form = $this->createForm(CategoryType::class, $category);
 
         $form->handleRequest($request);
@@ -103,12 +108,16 @@ class CategoryController extends Controller
 
             $em->flush();
 
-            $this->addFlash('notice', 'Category modified');
+            $this->addFlash('notice', $translator->trans('category.notice.updated_success'));
 
             return $this->redirectToRoute('category_list');
         }
         return $this->render('category/edit.html.twig', array(
             'form' => $form->createView()
         ));
+    }
+    private function translator()
+    {
+        return $this->get('translator');
     }
 }
