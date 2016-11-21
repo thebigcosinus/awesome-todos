@@ -5,6 +5,7 @@ menu:
     hello: Bonjour %name%
     profile: Profile
     labels: Labels
+    contact: Contact
 
 app:
     deconnection: Se déconnecter
@@ -50,3 +51,5 @@ category:
         category: Catégorie
         actions: Actions
     is_spam: La catégorie a été détectée comme spam
+contact:
+    default_message: Entrez votre message ici

@@ -36,6 +36,7 @@
                     <li class="active"><a href="{{ path('todo_list') }}">{{ 'menu.todos'| trans}}</a></li>
                     <li><a href="{{ path('category_list') }}">{{ 'menu.categories'|trans }}</a></li>
                     <li><a href="{{ path('label_index') }}">{{ 'menu.labels'|trans }}</a></li>
+                    <li><a href="{{ path('contact_form') }}">{{ 'menu.contact'|trans }}</a></li>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <li><a href="/_console">{{ 'menu.console'|trans }}</a></li>
                     {% endif %}
@@ -43,12 +44,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ 'menu.profile' | trans }}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="/logout">{{ 'app.deconnection' | trans }}</a></li>
-                            {#<li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li class="dropdown-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>#}
+
                         </ul>
                     </li>
                 </ul>
