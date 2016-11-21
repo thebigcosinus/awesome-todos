@@ -66,7 +66,7 @@ class CategoryController extends Controller
 
     /**
      * @param Category $category
-     * @Route("/category/delete/{id}", name="category_delete")
+     * @Route("/category/delete/{id}", name="category_delete", requirements={"id"="\d+"})
      * @ParamConverter("categoty", class="AppBundle:Category")
      */
     public function deleteAction(Category $category)
@@ -87,7 +87,7 @@ class CategoryController extends Controller
      * @param Category $category
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/category/edit/{id}", name="category_edit")
+     * @Route("/category/edit/{id}", name="category_edit", requirements={"id"="\d+"})
      */
     public function editAction(Category $category, Request $request)
     {

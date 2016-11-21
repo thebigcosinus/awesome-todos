@@ -57,7 +57,7 @@ class TodoController extends Controller
     }
 
     /**
-     * @Route("/todos/details/{id}", name="todo_details")
+     * @Route("/todos/details/{id}", name="todo_details", requirements={"id"="\d+"})
      * @ParamConverter("todo", class="AppBundle:Todo")
      */
     public function detailsAction(Todo $todo, Request $request)
@@ -73,7 +73,7 @@ class TodoController extends Controller
     }
 
     /**
-     * @route("/todos/edit/{id}", name="todo_edit")
+     * @route("/todos/edit/{id}", name="todo_edit", requirements={"id"="\d+"})
      * @ParamConverter("todo", class="AppBundle:Todo")
      */
     public function editAction(Todo $todo, Request $request) {
@@ -110,7 +110,7 @@ class TodoController extends Controller
 
     /**
      * @param $id
-     * @route("/todos/delete/{id}", name="todo_delete")
+     * @route("/todos/delete/{id}", name="todo_delete", requirements={"id"="\d+"})
      * @ParamConverter("todo",class="AppBundle:Todo")
      */
     public function deleteAction(Todo $todo) {
