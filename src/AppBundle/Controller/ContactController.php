@@ -21,6 +21,36 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 class ContactController extends Controller
 {
     /**
+     * @Route("/mail", name="mail")
+     */
+    public function mailAction() {
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Hello Email')
+            ->setFrom('fabien@gvmail.fr')
+            ->setTo('fabien@gvmail.fr')
+            ->setBody(
+                $this->renderView(
+                    'Emails/contact.html.twig',
+                    array('name' => 'fabien')
+                ),
+                'text/html'
+            )
+            /*
+             * If you also want to include a plaintext version of the message
+            ->addPart(
+                $this->renderView(
+                    'Emails/registration.txt.twig',
+                    array('name' => $name)
+                ),
+                'text/plain'
+            )
+            */
+        ;
+        $this->get('mailer')->send($message);
+
+        return $this->redirectToRoute("todo_list");
+    }
+    /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/contact", name="contact_form")
