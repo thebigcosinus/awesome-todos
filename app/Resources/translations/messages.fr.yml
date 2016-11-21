@@ -48,3 +48,4 @@ category:
     list:
         category: Catégorie
         actions: Actions
+    is_spam: La catégorie a été détectée comme spam

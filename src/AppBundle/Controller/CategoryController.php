@@ -37,6 +37,8 @@ class CategoryController extends Controller
     public function createAction(Request $request)
     {
         $translator = $this->translator();
+        
+        $antispam = $this->container->get('app.antispam');
 
         $category = new Category();
         
@@ -48,6 +50,12 @@ class CategoryController extends Controller
 
              /** @var Category $category */
              $category = $form->getData();
+             if ($antispam->isSpam($category->getName())) {
+                 $this->addFlash('error',$translator->trans('category.is_spam'));
+                 return $this->redirectToRoute('category_list');
+
+             }
+            
              
              $category->setOwner($this->getUser());
 

@@ -69,7 +69,6 @@ class TodoController extends Controller
              'todo' => $todo   ,
             ]
         );
-
     }
 
     /**
