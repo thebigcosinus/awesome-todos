@@ -4,13 +4,15 @@
     <div>
         <a href="{{ path('todo_create') }}" class="btn btn-default">{{ 'todo.button.add_todo' | trans }}</a>
     </div>
-
+    <div class="well">
+        {{ 'todo.nb_todos' | transchoice(5)}}
+    </div>
     <table class="table table-bordered">
         <thead>
         <tr>
             <th>#</th>
-            <th>Todo</th>
             <th>{{ "todo.list.todo"| trans }}</th>
+            <th>{{ "todo.list.created"| trans }}</th>
             <th>{{ "todo.list.due_date"| trans }}</th>
             <th>{{ "todo.list.actions" | trans }}</th>
         </tr>
@@ -20,12 +22,12 @@
             <tr>
                 <td scope="row">{{todo.id}}</td>
                 <td>{{todo.name}}</td>
-                <td>{{todo.createdAt | date('F j, Y, g:i a')}}</td>
-                <td>{{todo.duedate | date('F j, Y, g:i a')}}</td>
+                <td>{{todo.createdAt | localizeddate('full', 'short')}}</td>
+                <td>{{todo.duedate | localizeddate('full', 'none')}}</td>
                 <td>
-                    <a href="{{ path('todo_details', {'id': todo.id}) }}" class="btn btn-success">{{'todo.actions.view' |trans }}</a>
-                    <a href="{{path('todo_edit', {'id': todo.id})}}" class="btn btn-default">{{'todo.actions.edit' |trans }}</a>
-                    <a href="{{ path('todo_delete', {'id': todo.id})}}" class="btn btn-danger">{{'todo.actions.delete' |trans }}</a>
+                    <a href="{{ path('todo_details', {'id': todo.id}) }}" class="btn btn-success">{{'todo.actions.view' | trans }}</a>
+                    <a href="{{path('todo_edit', {'id': todo.id})}}" class="btn btn-default">{{'todo.actions.edit' | trans }}</a>
+                    <a href="{{ path('todo_delete', {'id': todo.id})}}" class="btn btn-danger">{{'todo.actions.delete' | trans }}</a>
                 </td>
             </tr>
         {% endfor %}

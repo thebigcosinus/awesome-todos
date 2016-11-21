@@ -6,6 +6,6 @@
     <ul class="list-group">
         <li class="list-group-item">{{ "todo.label.category"|trans }} {{todo.category}}</li>
         <li class="list-group-item">{{ "todo.label.description" | trans }} {{todo.description}}</li>
-        <li class="list-group-item">{{ "todo.label.due_date" | trans}} {{todo.duedate | date('F j, Y, g:i a')}}</li>
+        <li class="list-group-item">{{ "todo.label.due_date" | trans}} {{todo.duedate | localizeddate('full', 'none')}}</li>
     </ul>
 {% endblock %}

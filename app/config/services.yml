@@ -4,6 +4,10 @@ parameters:
 #    parameter_name: value
 
 services:
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - {name: twig.extension}
     app.image_type_extension:
         class: AppBundle\Form\Extension\ImageTypeExtension
         tags:

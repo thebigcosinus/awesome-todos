@@ -121,7 +121,7 @@ class TodoController extends Controller
         
         $em->flush();
 
-        $this->addFlash('notice', $translator->trans('todo.notice.remove_success'));
+        $this->addFlash('notice', $translator->trans('todo.notice.removed_success'));
 
         return $this->redirectToRoute('todo_list');
     }

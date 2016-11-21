@@ -1,8 +1,15 @@
-menu.todos: Tâches
-menu.categories: Catégories
-menu.console: Console
+menu:
+    todos: Tâches
+    categories: Catégories
+    console: Console
+    hello: Bonjour %name%
+    profile: Profile
+
+app:
+    deconnection: Se déconnecter
 
 todo:
+    nb_todos: "[0,1]Il y a  %count% annonce | [2,+Inf] Il y a %count% annonces"
     notice:
         added_success: Tâche ajoutée avec succès
         updated_success: Tâche mise à jour avec succès
@@ -22,6 +29,7 @@ todo:
         todo: Tâche
         due_date: Avant
         actions: Actions
+        created: Crée le
     actions:
         view: Voir
         edit: Modifier
