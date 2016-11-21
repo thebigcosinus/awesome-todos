@@ -1,4 +1,7 @@
 /app/config/parameters.yml
+/app/spool/*
+/app/spool/default/*
+!/app/spool/.gitkeep
 /build/
 /phpunit.xml
 /var/*
