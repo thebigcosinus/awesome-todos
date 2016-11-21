@@ -35,6 +35,7 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="{{ path('todo_list') }}">{{ 'menu.todos'| trans}}</a></li>
                     <li><a href="{{ path('category_list') }}">{{ 'menu.categories'|trans }}</a></li>
+                    <li><a href="{{ path('label_index') }}">{{ 'menu.labels'|trans }}</a></li>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <li><a href="/_console">{{ 'menu.console'|trans }}</a></li>
                     {% endif %}

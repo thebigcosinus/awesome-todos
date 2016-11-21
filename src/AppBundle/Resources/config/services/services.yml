@@ -3,5 +3,5 @@ services:
         class: AppBundle\Utils\Antispam
         arguments: #L'ordre des arguments du constructeur est le même que l'ordre des arguments définis dans la configuration du service.
             - "@mailer" # Le service Mailer pour envoyer des mails
-            - %locale% # le paramètre dans app/config/parameters.yml
+            - "%locale%" # le paramètre dans app/config/parameters.yml
             - 50 # un nombre

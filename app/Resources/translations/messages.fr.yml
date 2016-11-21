@@ -4,6 +4,7 @@ menu:
     console: Console
     hello: Bonjour %name%
     profile: Profile
+    labels: Labels
 
 app:
     deconnection: Se déconnecter

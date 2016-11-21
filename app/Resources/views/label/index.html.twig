@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Labels list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for label in labels %}
+            <tr>
+                <td><a href="{{ path('label_show', { 'id': label.id }) }}">{{ label.id }}</a></td>
+                <td>{{ label.name }}</td>
+                <td>{{ label.color }}</td>
+                <td>{% if label.createdAt %}{{ label.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if label.updatedAt %}{{ label.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('label_show', { 'id': label.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('label_edit', { 'id': label.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('label_new') }}">Create a new label</a>
+        </li>
+    </ul>
+{% endblock %}
