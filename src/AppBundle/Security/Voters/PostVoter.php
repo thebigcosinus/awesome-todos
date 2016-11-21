@@ -60,9 +60,9 @@ class PostVoter extends Voter
         TokenInterface $token
     ) {
         //ROLE SUPER ADMIN ACCES TOUT
-/*        if ($this->decisionManager->decide($token, array('ROLE_SUPER_ADMIN'))) {
+        if ($this->decisionManager->decide($token, array('ROLE_SUPER_ADMIN'))) {
             return true;
-        }*/
+        }
 
         $user = $token->getUser();
         

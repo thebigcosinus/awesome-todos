@@ -32,13 +32,7 @@ class DefaultController extends Controller
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
-        $user = $this->getUser();
-        // $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        // Old way :
-        // if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-        //     throw $this->createAccessDeniedException('Unable to access this page!');
-        // }
     }
     /**
      * @return Response

@@ -72,11 +72,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
     {
         $apiKey = $request->query->get('apikey');
 
-        //from  headers
-        //$apiKey = $request->headers->get('apikey');
-
         if (!$apiKey) {
-            //throw new BadCredentialsException;
             // or to just skip api key authentication
             return null;
         }
