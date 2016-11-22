@@ -49,7 +49,7 @@ class Label
      * @ORM\JoinColumn(nullable=false)
      */
     private $owner;
-
+    
     public function __construct()
     {
         $this->createdAt = $this->updatedAt = new \DateTime();

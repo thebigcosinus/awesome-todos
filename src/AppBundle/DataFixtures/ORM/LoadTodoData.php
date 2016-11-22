@@ -38,6 +38,8 @@ class LoadTodoData extends AbstractFixture implements OrderedFixtureInterface
         $todo1->setName("Todo1");
         $todo1->setDueDate(new \DateTime());
         $todo1->setDescription('DF-Todo1');
+        $todo1->addLabel($this->getReference('label-famille-god'));
+        $todo1->addLabel($this->getReference('label-travail-god'));
 
         $todo2 =  new Todo();
         $todo2->setCategory($categorie1);
@@ -45,6 +47,9 @@ class LoadTodoData extends AbstractFixture implements OrderedFixtureInterface
         $todo2->setDueDate(new \DateTime());
         $todo2->setDescription('DF-Todo2');
         $todo2->setCreator($godUser);
+        $todo2->addLabel($this->getReference('label-famille-god'));
+        $todo2->addLabel($this->getReference('label-course-god'));
+        $todo2->addLabel($this->getReference('label-travail-god'));
 
         $todo3 =  new Todo();
         $todo3->setCategory($categorie2);
@@ -52,6 +57,9 @@ class LoadTodoData extends AbstractFixture implements OrderedFixtureInterface
         $todo3->setDueDate(new \DateTime());
         $todo3->setDescription('DF-Todo3');
         $todo3->setCreator($fabienUser);
+        $todo3->addLabel($this->getReference('label-course-fabien'));
+        $todo3->addLabel($this->getReference('label-maison-fabien'));
+        $todo3->addLabel($this->getReference('label-argent-fabien'));
 
         //$manager->persist($categorie1);
         //$manager->persist($categorie2);
@@ -70,6 +78,6 @@ class LoadTodoData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 110;
+        return 200;
     }
 }

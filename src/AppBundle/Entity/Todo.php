@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Entity\Traits\TimestampableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -36,6 +37,7 @@ class Todo
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="todos")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     * Entité propriétaire Todo $todo->getCtaegory()
      */
     private $category;
 
@@ -55,8 +57,15 @@ class Todo
      * @var
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
+     * Entité propriétaire
      */
     private $creator;
+
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Label", cascade={"persist"})
+     */
+    private $labels;
 
     /**
      * @return mixed
@@ -80,6 +89,7 @@ class Todo
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+        $this->labels = new ArrayCollection();
     }
 
     /**
@@ -176,6 +186,27 @@ class Todo
     public function getDueDate()
     {
         return $this->dueDate;
+    }
+
+    /**
+     * @param Label $label
+     */
+    public function addLabel(Label $label) {
+        $this->labels[] = $label;
+    }
+
+    /**
+     * @param Label $label
+     */
+    public function removeLabel(Label $label) {
+        $this->labels->removeElement($label);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLabels() {
+        return $this->labels;
     }
 
 }

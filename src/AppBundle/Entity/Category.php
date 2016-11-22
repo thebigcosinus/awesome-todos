@@ -42,6 +42,7 @@ class Category
     /**
      * @var
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Todo", mappedBy="category")
+     * Relation inverse: entité propriétaire Todo $categories->getTodos()
      */
     protected $todos;
 
@@ -49,6 +50,7 @@ class Category
      * @var
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
+     * Entité propriétaire
      */
     protected $owner;
 
