@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
 use AppBundle\Form\Type\CategoryType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +19,7 @@ class CategoryController extends Controller
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Method("GET")
      */
     public function menuAction()
     {
@@ -31,6 +33,7 @@ class CategoryController extends Controller
      * @param $name
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/categories", name="category_list")
+     * @Method({"GET"})
      */
     public function listAction()
     {
@@ -45,6 +48,7 @@ class CategoryController extends Controller
      * @Route("/category/create", name="category_create")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Method({"GET","POST"})
      */
     public function createAction(Request $request)
     {
@@ -107,6 +111,7 @@ class CategoryController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/category/edit/{id}", name="category_edit", requirements={"id"="\d+"})
+     * @Method({"GET","POST"})
      */
     public function editAction(Category $category, Request $request)
     {

@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Todo;
 use AppBundle\Form\Type\TodoType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +17,7 @@ class TodoController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/todolist/web", name="todo_list")
+     * @Method("GET")
      */
     public function listAction(Request $request) {
         $todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findAll();
@@ -28,6 +30,7 @@ class TodoController extends Controller
     /**
      * @param Request $request
      * @Route("/todos/create" ,name="todo_create")
+     * @Method({"GET","POST"})
      */
     public function createAction(Request $request)
     {
@@ -59,6 +62,7 @@ class TodoController extends Controller
     /**
      * @Route("/todos/details/{id}", name="todo_details", requirements={"id"="\d+"})
      * @ParamConverter("todo", class="AppBundle:Todo")
+     * @Method({"GET"})
      */
     public function detailsAction(Todo $todo, Request $request)
     {
@@ -74,6 +78,7 @@ class TodoController extends Controller
     /**
      * @route("/todos/edit/{id}", name="todo_edit", requirements={"id"="\d+"})
      * @ParamConverter("todo", class="AppBundle:Todo")
+     * @Method({"GET","POST"})
      */
     public function editAction(Todo $todo, Request $request) {
 
