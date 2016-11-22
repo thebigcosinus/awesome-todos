@@ -9,6 +9,7 @@ menu:
 
 app:
     deconnection: Se déconnecter
+    contact: Contact
 
 todo:
     nb_todos: "[0,1]Il y a  %count% annonce | [2,+Inf] Il y a %count% annonces"

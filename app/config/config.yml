@@ -38,6 +38,9 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
         - 'bootstrap_3_layout.html.twig'
+    globals:
+        webmaster: %app_webmaster%
+        webmaster_firstname: %app_webmaster_firstname%
 
 # Doctrine Configuration
 doctrine:

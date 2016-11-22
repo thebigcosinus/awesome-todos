@@ -15,6 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CategoryController extends Controller
 {
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function menuAction()
+    {
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Category');
+
+        $categories = $repo->findAll();
+        
+        return $this->render('category/menu.html.twig', array('categories' => $categories));
+    }
     /**
      * @param $name
      * @return \Symfony\Component\HttpFoundation\Response

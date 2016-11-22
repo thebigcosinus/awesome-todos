@@ -10,6 +10,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
         <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
         {% block stylesheets %}{% endblock %}
 
         <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
@@ -52,9 +53,12 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-sm-3 col-md-2 sidebar">
+                {{ render(controller('AppBundle:Category:menu')) }}
+            </div>
+            <div class="col-md-8">
                 <br><br><br>
                 {% for flash_message in app.session.flashbag.get('notice') %}
                     <div class="alert alert-success">{{flash_message}}</div>
@@ -67,6 +71,11 @@
             </div>
         </div>
     </div><!-- /.container -->
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">{{ 'Contact' | trans }}{{ webmaster }}</p>
+        </div>
+    </footer>
         {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
             <a href="{{ path('new_route', {'_switch_user': '_exit'}) }}">Exit impersonation</a>
         {% endif %}
