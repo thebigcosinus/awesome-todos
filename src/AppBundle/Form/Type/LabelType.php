@@ -15,18 +15,19 @@ class LabelType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class)
-                ->add('color', TextType::class)
-        ;
+            ->add('color', TextType::class, array('attr' => array('class' => 'jscolor')));
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Label'
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'AppBundle\Entity\Label',
+            )
+        );
     }
 
     /**
