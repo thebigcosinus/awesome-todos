@@ -21,7 +21,7 @@ class TodoType extends AbstractType
             ->add('category', EntityType::class, array(
                 'class' => 'AppBundle:Category',
                 'multiple' => false,
-                'choice_label' => 'name'
+                'choice_label' => 'display'
             ))
             ->add(
                 'description',

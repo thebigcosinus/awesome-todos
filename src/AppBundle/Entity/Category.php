@@ -141,4 +141,8 @@ class Category
     {
         return $this->todos;
     }
+
+    public function getDisplay() {
+        return $this->id .' - '. $this->name;
+    }
 }
