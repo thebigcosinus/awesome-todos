@@ -71,8 +71,8 @@ security:
                 use_forward: false
                 provider: my_db_provider
             logout:
-                path: /logout
-                target: /login
+                path: /{_locale}/logout
+                target: /{_locale}/login
             remember_me:
                 secret: '%secret%'
                 lifetime: 604800

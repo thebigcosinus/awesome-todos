@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    {% block stylesheets %}{% endblock %}
+
+    <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/vendor/symfony-collection/jquery.collection.js') }}"></script>
+</head>
+<body>
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Todo List</a>
+        </div>
+    </div><!-- /.container -->
+</nav>
+
+<div class="container">
+    <div class="row">
+        {% block body %}{% endblock %}
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">{{ 'Contact' | trans }}{{ webmaster }}</p>
+    </div>
+</footer>
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>

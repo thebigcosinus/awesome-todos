@@ -56,7 +56,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {{ render(controller('AppBundle:Category:menu')) }}
+                {% endif %}
             </div>
             <div class="col-md-8">
                 <br><br><br>
