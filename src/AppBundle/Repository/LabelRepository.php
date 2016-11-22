@@ -9,7 +9,11 @@
 namespace AppBundle\Repository;
 
 
-class LabelRepository extends \Doctrine\ORM\EntityRepository
-{
+use Doctrine\ORM\EntityRepository;
 
+class LabelRepository extends EntityRepository
+{
+    public function getUserLabel() {
+       
+    }
 }

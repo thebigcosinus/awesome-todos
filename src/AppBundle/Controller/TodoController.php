@@ -130,6 +130,7 @@ class TodoController extends Controller
         return $this->redirectToRoute('todo_list');
     }
 
+
     private function translator()
     {
         return $this->get('translator');
