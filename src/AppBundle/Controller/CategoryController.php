@@ -55,8 +55,7 @@ class CategoryController extends Controller
                  return $this->redirectToRoute('category_list');
 
              }
-            
-             
+
              $category->setOwner($this->getUser());
 
              $em = $this->getDoctrine()->getManager();

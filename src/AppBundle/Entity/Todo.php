@@ -34,7 +34,8 @@ class Todo
     /**
      * @var string
      *
-     * @ORM\Column(name="category", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="todos")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      */
     private $category;
 
@@ -114,10 +115,10 @@ class Todo
 
     /**
      * Set category
-     * @param string $category
+     * @param Category $category
      * @return Todo
      */
-    public function setCategory($category)
+    public function setCategory(Category $category)
     {
         $this->category = $category;
 
@@ -178,4 +179,3 @@ class Todo
     }
 
 }
-

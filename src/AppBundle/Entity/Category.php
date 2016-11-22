@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Traits\TimestampableTrait;
@@ -40,6 +41,12 @@ class Category
 
     /**
      * @var
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Todo", mappedBy="category")
+     */
+    protected $todos;
+
+    /**
+     * @var
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -48,6 +55,7 @@ class Category
     public function __construct()
     {
         $this->createdAt = $this->updatedAt = new \DateTime();
+        $this->todos = new ArrayCollection();
     }
 
     /**
@@ -97,6 +105,38 @@ class Category
     {
         $this->owner = $owner;
     }
-
     
+    /**
+     * Add todo
+     *
+     * @param \AppBundle\Entity\Todo $todo
+     *
+     * @return Category
+     */
+    public function addTodo(\AppBundle\Entity\Todo $todo)
+    {
+        $this->todos[] = $todo;
+
+        return $this;
+    }
+
+    /**
+     * Remove todo
+     *
+     * @param \AppBundle\Entity\Todo $todo
+     */
+    public function removeTodo(\AppBundle\Entity\Todo $todo)
+    {
+        $this->todos->removeElement($todo);
+    }
+
+    /**
+     * Get todos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTodos()
+    {
+        return $this->todos;
+    }
 }
