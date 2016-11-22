@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 /**
  * Todo
  *
- * @ORM\Table(name="todo")
+ * @ORM\Table(name="todos")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TodoRepository")
  */
 class Todo
