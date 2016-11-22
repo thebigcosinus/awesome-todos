@@ -26,11 +26,11 @@
                 <td>{{todo.createdAt | localizeddate('full', 'short')}}</td>
                 <td>{{todo.duedate | localizeddate('full', 'none')}}</td>
                 <td>
-                    {% if not todo.lablels.empty %}
+               {#     {% if not todo.lablels.empty %}
                         {% for label in todo.labels %}
                         <span class="label" style="background-color: {{ label.color }}">{{ label.name }}</span>
                         {% endfor %}
-                    {% endif %}
+                    {% endif %}#}
                 </td>
                 <td>
                     <a href="{{ path('todo_details', {'id': todo.id}) }}" class="btn btn-success">{{'todo.actions.view' | trans }}</a>

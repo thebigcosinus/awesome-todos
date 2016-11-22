@@ -5,8 +5,16 @@
     <div class="well">
         {{ form_start(form, {'attr':{'class':''}}) }}
         {{ form_errors(form) }}
+
+        {{ form_row(form.labels) }}
+        <a href="#" id="add_label" class="btn btn-default">Ajouter un label</a>
         {{ form_widget(form) }}
         {{ form_rest(form) }}
         {{ form_end(form) }}
     </div>
 {%  endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/todo-create.js') }}"></script>
+{% endblock %}
+
+

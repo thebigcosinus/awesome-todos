@@ -22,7 +22,6 @@ class CategoryType extends AbstractType
         $builder->add('name', TextType::class)
             ->add('submit', SubmitType::class)
             ;
-
     }
 
     public function configureOptions(OptionsResolver $resolver)

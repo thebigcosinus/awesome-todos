@@ -2,8 +2,10 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -16,7 +18,11 @@ class TodoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class)
-            ->add('category', TextType::class)
+            ->add('category', EntityType::class, array(
+                'class' => 'AppBundle:Category',
+                'multiple' => false,
+                'choice_label' => 'name'
+            ))
             ->add(
                 'description',
                 TextareaType::class,
@@ -31,10 +37,15 @@ class TodoType extends AbstractType
                     'attr' => array(
                         'class' => 'form-control input-inline datepicker',
                         'data-provide' => 'datepicker',
-                        'data-date-format' => 'dd-mm-yyyy'
+                        'data-date-format' => 'dd-mm-yyyy',
                     ),
                 )
             )
+            ->add('labels', CollectionType::class, array(
+                'entry_type' => LabelType::class,
+                'allow_add' => true,
+                'allow_delete' => true
+            ))
             ->add('is_public', CheckboxType::class, array('required' => false))
             ->add('save', SubmitType::class);
 
