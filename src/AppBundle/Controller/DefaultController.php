@@ -41,37 +41,6 @@ class DefaultController extends Controller
     public function adminAction() {
         return new Response('You must be admin');
     }
-    /**
-     * @Route("/contact", name="")
-     */
-    public function contactAction(Request $request)
-    {
-        $defaultData =  array('message' => 'Type your message here');
-
-        $form = $this->createFormBuilder($defaultData)
-            ->add('name', TextType::class, array('constraints' => new Length(array('min' =>3))))
-            ->add('lastname', TextType::class, array('constraints' =>array( new NotBlank(array('groups' => array('create', 'update'))),new Length(array('min' =>3)))))
-            ->add('email', EmailType::class)
-            ->add('message', TextareaType::class)
-            ->add('gender', GenderType::class)
-            ->add('send', SubmitType::class)
-            ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $this->redirectToRoute('target_route');
-        }
-
-        return $this->render(
-            'default/contact.html.twig',
-            [
-                'form' => $form->createView(),
-            ]
-        );
-
-    }
 
     /**
      * @Route("/test", name="target_route")
