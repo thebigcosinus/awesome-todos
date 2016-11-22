@@ -17,19 +17,36 @@ class TodoType extends AbstractType
     {
         $builder->add('name', TextType::class)
             ->add('category', TextType::class)
-            ->add('description', TextareaType::class, array('required' => false))
-            ->add('due_date', DateTimeType::class)
+            ->add(
+                'description',
+                TextareaType::class,
+                array('required' => false)
+            )
+            ->add(
+                'due_date',
+                DateTimeType::class,
+                array(
+                    'widget' => 'single_text',
+                    'format' => 'dd-MM-yyyy',
+                    'attr' => array(
+                        'class' => 'form-control input-inline datepicker',
+                        'data-provide' => 'datepicker',
+                        'data-date-format' => 'dd-mm-yyyy'
+                    ),
+                )
+            )
             ->add('is_public', CheckboxType::class, array('required' => false))
-            ->add('save', SubmitType::class)
-            ;
+            ->add('save', SubmitType::class);
 
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Todo'
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'AppBundle\Entity\Todo',
+            )
+        );
 
     }
 
