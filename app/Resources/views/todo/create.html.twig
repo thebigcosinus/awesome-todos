@@ -2,7 +2,11 @@
 
 {% block body %}
     <h2 class="page-header">{{ "todo.add.title" |trans }}</h2>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    <div class="well">
+        {{ form_start(form, {'attr':{'class':''}}) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
 {%  endblock %}

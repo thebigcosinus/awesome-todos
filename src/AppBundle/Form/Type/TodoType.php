@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -16,8 +17,9 @@ class TodoType extends AbstractType
     {
         $builder->add('name', TextType::class)
             ->add('category', TextType::class)
-            ->add('description', TextareaType::class)
+            ->add('description', TextareaType::class, array('required' => false))
             ->add('due_date', DateTimeType::class)
+            ->add('is_public', CheckboxType::class, array('required' => false))
             ->add('save', SubmitType::class)
             ;
 

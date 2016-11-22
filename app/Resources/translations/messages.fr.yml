@@ -31,8 +31,9 @@ todo:
     list:
         todo: Tâche
         due_date: Avant
-        actions: Actions
+        actions: Echéance
         created: Crée le
+        label: Labels
     actions:
         view: Voir
         edit: Modifier

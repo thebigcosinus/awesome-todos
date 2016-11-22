@@ -76,6 +76,11 @@ class Todo
     }
 
     /**
+     * @ORM\Column(type="boolean", name="is_public")
+     */
+    private $isPublic;
+    
+    /**
      * @param mixed $creator
      */
     public function setCreator(User $creator)
@@ -90,6 +95,7 @@ class Todo
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
         $this->labels = new ArrayCollection();
+        $this->isPublic = False;
     }
 
     /**
@@ -209,4 +215,28 @@ class Todo
         return $this->labels;
     }
 
+
+    /**
+     * Set isPublic
+     *
+     * @param boolean $isPublic
+     *
+     * @return Todo
+     */
+    public function setIsPublic($isPublic)
+    {
+        $this->isPublic = $isPublic;
+
+        return $this;
+    }
+
+    /**
+     * Get isPublic
+     *
+     * @return boolean
+     */
+    public function getIsPublic()
+    {
+        return $this->isPublic;
+    }
 }

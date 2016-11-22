@@ -14,6 +14,7 @@
             <th>{{ "todo.list.todo"| trans }}</th>
             <th>{{ "todo.list.created"| trans }}</th>
             <th>{{ "todo.list.due_date"| trans }}</th>
+            <th>{{ "todo.list.label"| trans }}</th>
             <th>{{ "todo.list.actions" | trans }}</th>
         </tr>
         </thead>
@@ -24,6 +25,13 @@
                 <td>{{todo.name}}</td>
                 <td>{{todo.createdAt | localizeddate('full', 'short')}}</td>
                 <td>{{todo.duedate | localizeddate('full', 'none')}}</td>
+                <td>
+                    {% if not todo.lablels.empty %}
+                        {% for label in todo.labels %}
+                        <span class="label" style="background-color: {{ label.color }}">{{ label.name }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{ path('todo_details', {'id': todo.id}) }}" class="btn btn-success">{{'todo.actions.view' | trans }}</a>
                     <a href="{{path('todo_edit', {'id': todo.id})}}" class="btn btn-default">{{'todo.actions.edit' | trans }}</a>
