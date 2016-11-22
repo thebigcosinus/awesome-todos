@@ -36,4 +36,16 @@ class CategoryRepository extends EntityRepository
             ->getResult()
             ;
     }
+
+    /**
+     * @param $pattern
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getLikeQueryBuilder($pattern) {
+        //Cette méthode retourne un queryBuilder et non une query
+        return $this->createQueryBuilder('c')
+            ->where('c.name LIKE :pattern')
+            ->setParameter('pattern', $pattern)
+            ;
+    }
 }

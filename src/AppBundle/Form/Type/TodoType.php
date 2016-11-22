@@ -2,6 +2,8 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\Todo;
+use AppBundle\Repository\CategoryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -11,17 +13,25 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TodoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $pattern = 'c%';
+
         $builder->add('name', TextType::class)
             ->add('category', EntityType::class, array(
                 'class' => 'AppBundle:Category',
                 'multiple' => false,
-                'choice_label' => 'display'
+                'expanded' => false,
+                'choice_label' => 'display',
+                'query_builder' => function(CategoryRepository $repository) use($pattern) {
+                    return $repository->getLikeQueryBuilder($pattern);
+                }
             ))
             ->add(
                 'description',
@@ -46,9 +56,25 @@ class TodoType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true
             ))
-            ->add('is_public', CheckboxType::class, array('required' => false))
+            //->add('is_public', CheckboxType::class, array('required' => false))
             ->add('save', SubmitType::class);
 
+        /**
+         * Dans un objectif didactique on va tester l utilsiation des evement PRE-SET_DATA
+         * Si la tache est marquée comme public on ne pourra plus modifier le champs
+         */
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            /** @var Todo $todo */
+            $todo = $event->getData();
+            if (null === $todo) {
+                return;
+            }
+            if ($todo->getId() === null || $todo->getIsPublic()) {
+                $event->getForm()->add('is_public', CheckboxType::class, array('required' => false));
+            } else {
+                $event->getForm()->remove('is_public');
+            }
+        });
     }
 
     public function configureOptions(OptionsResolver $resolver)

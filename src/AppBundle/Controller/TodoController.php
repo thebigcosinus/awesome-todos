@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Todo;
+use AppBundle\Form\Type\TodoEditType;
 use AppBundle\Form\Type\TodoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -84,7 +85,7 @@ class TodoController extends Controller
 
         $translator = $this->translator();
 
-        $form = $this->createForm(TodoType::class, $todo);
+        $form = $this->createForm(TodoEditType::class, $todo);
 
         $form->handleRequest($request);
 

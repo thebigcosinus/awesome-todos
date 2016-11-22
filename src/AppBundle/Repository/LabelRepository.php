@@ -16,4 +16,6 @@ class LabelRepository extends EntityRepository
     public function getUserLabel() {
        
     }
+
+
 }
