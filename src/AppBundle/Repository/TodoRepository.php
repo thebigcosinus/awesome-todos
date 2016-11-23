@@ -10,4 +10,5 @@ namespace AppBundle\Repository;
  */
 class TodoRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function isFlood ($ip, $time) {}
 }

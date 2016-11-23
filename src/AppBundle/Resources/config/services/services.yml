@@ -7,6 +7,8 @@ services:
             - 50 # un nombre
     app.validator.antiflood:
         class: AppBundle\Validator\AntifloodValidator
-        arguments: ["@request_stack", "@doctrine.orm.entity_manager"]
+        arguments:
+            - "@request_stack"
+            - "@doctrine.orm.entity_manager"
         tags:
-            - {name: validator.constraint_validatorn, alias: app_antiflood}
+            - {name: validator.constraint_validator, alias: app_antiflood}
