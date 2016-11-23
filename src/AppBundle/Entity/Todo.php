@@ -3,10 +3,13 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Entity\Traits\TimestampableTrait;
+use AppBundle\Utils\Antispam;
+use AppBundle\Validator\Antiflood;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Todo
@@ -52,6 +55,7 @@ class Todo
     /**
      * @var string
      * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     * @Antiflood()
      */
     private $description;
 
@@ -61,7 +65,7 @@ class Todo
      * @Assert\DateTime()
      */
     private $dueDate;
-    
+
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
@@ -98,7 +102,7 @@ class Todo
      * @Assert\Type(type="boolean")
      */
     private $isPublic;
-    
+
     /**
      * @param mixed $creator
      */
@@ -115,7 +119,7 @@ class Todo
         $this->updatedAt = new \DateTime();
         $this->labels = new ArrayCollection();
         $this->attachments = new ArrayCollection();
-        $this->isPublic = False;
+        $this->isPublic = false;
     }
 
     /**
@@ -179,7 +183,6 @@ class Todo
     public function setDescription($description)
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -217,42 +220,48 @@ class Todo
     /**
      * @param Label $label
      */
-    public function addLabel(Label $label) {
+    public function addLabel(Label $label)
+    {
         $this->labels[] = $label;
     }
 
     /**
      * @param Label $label
      */
-    public function removeLabel(Label $label) {
+    public function removeLabel(Label $label)
+    {
         $this->labels->removeElement($label);
     }
 
     /**
      * @return ArrayCollection
      */
-    public function getLabels() {
+    public function getLabels()
+    {
         return $this->labels;
     }
 
     /**
      * @param Attachment $attachment
      */
-    public function addAttachment(Attachment $attachment) {
+    public function addAttachment(Attachment $attachment)
+    {
         $this->attachments[] = $attachment;
     }
 
     /**
      * @param Attachment $attachment
      */
-    public function removeAttachment(Attachment $attachment) {
+    public function removeAttachment(Attachment $attachment)
+    {
         $this->attachments->removeElement($attachment);
     }
 
     /**
      * @return ArrayCollection
      */
-    public function getAttachments() {
+    public function getAttachments()
+    {
         return $this->attachments;
     }
 
@@ -279,5 +288,23 @@ class Todo
     public function getPublic()
     {
         return $this->isPublic;
+    }
+
+    /**
+     * @param ExecutionContextInterface $context
+     * @Assert\Callback
+     */
+    public function isDescriptionValid(ExecutionContextInterface $context)
+    {
+        $forbiddenWords = array('démotivation', 'abandon');
+
+        if (preg_match(
+            '#'.implode('|', $forbiddenWords).'#',
+            $this->getDescription()
+        )) {
+            $context->buildViolation('Contenu invalide car il contient un mot interdit.')
+                ->atPath('description')
+                ->addViolation();
+        }
     }
 }

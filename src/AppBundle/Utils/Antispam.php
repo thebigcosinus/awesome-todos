@@ -36,7 +36,7 @@ class Antispam
         $this->locale = $locale;
         $this->minLength = (int) $minLength;
     }
-    
+
     public function isSpam($text) {
         $forbidden_words = array('sex', 'sexe');
         if (in_array($text, $forbidden_words)) {
@@ -44,4 +44,5 @@ class Antispam
         }
         return strlen($text) < $this->minLength;
     }
+    
 }

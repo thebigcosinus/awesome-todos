@@ -1,14 +1,21 @@
 language: php
+sudo: required
 php:
     - 5.6
     - 7.0
 env:
-    - SYMFONY_VERSION="3.1"
+    - SYMFONY_VERSION="3.1.*" DB=mysql
+    - SYMFONY_VERSION="dev-master" DB=mysql
 before_install:
+    - sudo apt-get -qq update
+    - sudo apt-get install -y libxml2-dev
     - phpenv config-add .travis.ini
     - cp app/config/parameters.yml.dist app/config/parameters.yml
 before_script:
     - composer self-update
     - composer install
 script: phpunit --configuration phpunit.xml.dist
+install:
+    - composer require symfony/framework-bundle:${SYMFONY_VERSION}
+
 
