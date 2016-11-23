@@ -5,3 +5,8 @@ services:
             - "@mailer" # Le service Mailer pour envoyer des mails
             - "%locale%" # le paramètre dans app/config/parameters.yml
             - 50 # un nombre
+    app.validator.antiflood:
+        class: AppBundle\Validator\AntifloodValidator
+        arguments: ["@request_stack", "@doctrine.orm.entity_manager"]
+        tags:
+            - {name: validator.constraint_validatorn, alias: app_antiflood}
