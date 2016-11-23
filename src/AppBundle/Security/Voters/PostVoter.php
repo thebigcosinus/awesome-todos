@@ -8,11 +8,11 @@
  */
 namespace AppBundle\Security\Voters;
 
+use AppBundle\Entity\Post;
 use AppBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use AppBundle\Entity\Post;
 
 class PostVoter extends Voter
 {
