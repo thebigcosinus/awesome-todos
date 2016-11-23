@@ -74,10 +74,10 @@ class TodoType extends AbstractType
             if (null === $todo) {
                 return;
             }
-            if ($todo->getId() === null || $todo->getIsPublic()) {
-                $event->getForm()->add('is_public', CheckboxType::class, array('required' => false));
+            if ($todo->getId() === null || $todo->getPublic()) {
+                $event->getForm()->add('public', CheckboxType::class, array('required' => false));
             } else {
-                $event->getForm()->remove('is_public');
+                $event->getForm()->remove('public');
             }
         });
     }
