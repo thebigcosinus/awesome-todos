@@ -4,7 +4,7 @@
     <a href="{{ path('todo_list') }}" class="btn btn-default">{{ 'todo.button.back_to_todos' | trans }}</a>
     <h2 class=page-header>{{todo.name}}</h2>
     <ul class="list-group">
-        <li class="list-group-item">{{ "todo.label.category"|trans }} {{todo.category}}</li>
+        <li class="list-group-item">{{ "todo.label.category"|trans }} {{todo.category.name}}</li>
         <li class="list-group-item">{{ "todo.label.description" | trans }} {{todo.description}}</li>
         <li class="list-group-item">{{ "todo.label.due_date" | trans}} {{todo.duedate | localizeddate('full', 'none')}}</li>
     </ul>

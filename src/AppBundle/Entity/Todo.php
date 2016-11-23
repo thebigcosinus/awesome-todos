@@ -68,6 +68,12 @@ class Todo
     private $labels;
 
     /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Attachment", cascade={"persist"})
+     */
+    private $attachments;
+
+    /**
      * @return mixed
      */
     public function getCreator()
@@ -95,6 +101,7 @@ class Todo
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
         $this->labels = new ArrayCollection();
+        $this->attachments = new ArrayCollection();
         $this->isPublic = False;
     }
 
@@ -213,6 +220,27 @@ class Todo
      */
     public function getLabels() {
         return $this->labels;
+    }
+
+    /**
+     * @param Attachment $attachment
+     */
+    public function addAttachment(Attachment $attachment) {
+        $this->attachments[] = $attachment;
+    }
+
+    /**
+     * @param Attachment $attachment
+     */
+    public function removeAttachment(Attachment $attachment) {
+        $this->attachments->removeElement($attachment);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAttachments() {
+        return $this->attachments;
     }
 
 

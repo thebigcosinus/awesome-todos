@@ -24,6 +24,10 @@ class TodoType extends AbstractType
         $pattern = 'c%';
 
         $builder->add('name', TextType::class)
+           /* ->add('attachments', EntityType::class, array(
+                'class' => 'AppBundle:Attachment'
+            ))*/
+            //->add('attachments', AttachmentType::class)
             ->add('category', EntityType::class, array(
                 'class' => 'AppBundle:Category',
                 'multiple' => false,

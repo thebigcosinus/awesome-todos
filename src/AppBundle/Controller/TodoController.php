@@ -92,6 +92,7 @@ class TodoController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Todo $todo */
             $todo = $form->getData();
+            
 
             $todo->setUpdatedAt(new \DateTime());
             
