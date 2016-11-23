@@ -113,7 +113,7 @@ class Task
      * @return mixed
      */
 
-    public function getIsActive()
+    public function getActive()
     {
         return $this->isActive;
     }
@@ -121,7 +121,7 @@ class Task
     /**
      * @param mixed $isActive
      */
-    public function setIsActive($isActive)
+    public function setActive($isActive)
     {
         $this->isActive = $isActive;
     }

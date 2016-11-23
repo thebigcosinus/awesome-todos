@@ -168,7 +168,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return User
      */
-    public function setIsActive($isActive)
+    public function setActive($isActive)
     {
         $this->isActive = $isActive;
 
@@ -180,7 +180,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return bool
      */
-    public function getIsActive()
+    public function getActive()
     {
         return $this->isActive;
     }

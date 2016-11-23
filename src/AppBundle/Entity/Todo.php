@@ -264,7 +264,7 @@ class Todo
      *
      * @return Todo
      */
-    public function setIsPublic($isPublic)
+    public function setPublic($isPublic)
     {
         $this->isPublic = $isPublic;
 
@@ -276,7 +276,7 @@ class Todo
      *
      * @return boolean
      */
-    public function getIsPublic()
+    public function getPublic()
     {
         return $this->isPublic;
     }
