@@ -46,6 +46,7 @@ class TodoType extends AbstractType
                 'due_date',
                 DateTimeType::class,
                 array(
+                    'required' => false,
                     'widget' => 'single_text',
                     'format' => 'dd-MM-yyyy',
                     'attr' => array(

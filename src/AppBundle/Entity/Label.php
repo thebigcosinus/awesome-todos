@@ -10,7 +10,8 @@ namespace AppBundle\Entity;
 
 use AppBundle\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\DateTime;
+
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Label
@@ -34,6 +35,7 @@ class Label
     /**
      * @var
      * @ORM\Column(type="string", length=50,nullable=false, unique=false)
+     * @Assert\Length(min=3, max=15)
      */
     private $name;
 

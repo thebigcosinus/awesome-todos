@@ -6,6 +6,7 @@ use AppBundle\Entity\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Todo
@@ -28,7 +29,13 @@ class Todo
 
     /**
      * @var string
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @Assert\Length(min="3",
+     *                max="100",
+     *                minMessage="The todo name must be at least {{ limit }} characters long",
+     *                maxMessage = "The todo name cannot be longer than {{ limit }} characters"
+     * )
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -38,18 +45,20 @@ class Todo
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="todos")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      * Entité propriétaire Todo $todo->getCtaegory()
+     * @Assert\Valid()
      */
     private $category;
 
     /**
      * @var string
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
      * @var string
-     * @ORM\Column(name="due_date", type="datetime")
+     * @ORM\Column(name="due_date", type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $dueDate;
     
@@ -58,18 +67,21 @@ class Todo
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      * Entité propriétaire
+     * @Assert\Valid()
      */
     private $creator;
 
     /**
      * @var
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Label", cascade={"persist"})
+     * @Assert\Valid()
      */
     private $labels;
 
     /**
      * @var
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Attachment", cascade={"persist"})
+     * @Assert\Valid()
      */
     private $attachments;
 
@@ -83,6 +95,7 @@ class Todo
 
     /**
      * @ORM\Column(type="boolean", name="is_public")
+     * @Assert\Type(type="boolean")
      */
     private $isPublic;
     

@@ -36,6 +36,10 @@ class Category
      * @var
      * @Assert\NotBlank()
      * @ORM\Column(name="name", type="string", length=255, nullable=false, unique=false)
+     * @Assert\Length(min="3",
+     *                max="20",
+     *                minMessage="The category name must be at least {{ limit }} characters long",
+     *                maxMessage="The category name cannot be longer than {{ limit }} characters")
      */
     protected $name;
 
@@ -43,6 +47,7 @@ class Category
      * @var
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Todo", mappedBy="category")
      * Relation inverse: entité propriétaire Todo $categories->getTodos()
+     *
      */
     protected $todos;
 
@@ -51,6 +56,7 @@ class Category
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      * Entité propriétaire
+     * @Assert\Valid()
      */
     protected $owner;
 

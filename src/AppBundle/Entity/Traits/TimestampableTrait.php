@@ -3,6 +3,8 @@
 namespace AppBundle\Entity\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
+use Symfony\Component\Validator\Constraints as Assert;
 
 trait TimestampableTrait
 {
@@ -10,6 +12,7 @@ trait TimestampableTrait
      * @var datetime $createdAt
      *
      * @ORM\Column(name="created_at", type="datetime")
+     * @Assert\DateTime()
      *
      */
     private $createdAt;
@@ -18,6 +21,7 @@ trait TimestampableTrait
      * @var datetime $updatedAt
      *
      * @ORM\Column(name="updated_at", type="datetime")
+     * @Assert\DateTime()
      */
     private $updatedAt;
 
