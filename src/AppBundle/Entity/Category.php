@@ -34,7 +34,7 @@ class Category
 
     /**
      * @var
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message = "category.name.not_blank")
      * @ORM\Column(name="name", type="string", length=255, nullable=false, unique=false)
      * @Assert\Length(min="3",
      *                max="20",

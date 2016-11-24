@@ -22,7 +22,7 @@ class TodoController extends Controller
      */
     public function listAction(Request $request) {
         $todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findAll();
-        
+        dump($todos);
         return $this->render('todo/index.html.twig', array(
             'todos' => $todos
         ));

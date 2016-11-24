@@ -2,8 +2,10 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Validator\ContainsAlphanumeric;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -26,6 +28,8 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=25, unique=true)
+     * @Assert\NotBlank(groups={"registration"})
+     * @ContainsAlphanumeric(groups={"registration"})
      */
     private $username;
 
@@ -40,6 +44,7 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
+     * @Assert\Email()
      */
     private $email;
 
@@ -328,5 +333,13 @@ class User implements AdvancedUserInterface, \Serializable
         $this->roles = $roles;
 
         return $this;
+    }
+
+    /**
+     * @Assert\IsTrue(message="Le mot de passe doit être différent du username")
+     */
+    public function isPasswordLegal()
+    {
+        return $this->username !== $this->password;
     }
 }

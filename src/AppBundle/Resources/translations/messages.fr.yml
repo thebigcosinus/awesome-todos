@@ -55,3 +55,4 @@ category:
     is_spam: La catégorie a été détectée comme spam
 contact:
     default_message: Entrez votre message ici
+Contact: Contact

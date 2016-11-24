@@ -9,10 +9,16 @@ framework:
 
 web_profiler:
     toolbar: true
+    position: bottom
     intercept_redirects: false
 
 monolog:
     handlers:
+        syslog:
+            type: stream
+            path: /tmp/symfony.log
+            level: ERROR
+            channels: [!event]
         main:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
@@ -34,3 +40,9 @@ swiftmailer:
     delivery_address: fabien@gvmail.com
     delivery_whitelist:
         - '/^fabien.gaubert@gmail\.com$/'
+debug:
+    max_items: 2500
+    max_string_length: -1
+    #dump_destination: /tmp/error.txt
+
+
