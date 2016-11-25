@@ -19,7 +19,7 @@ trait TimestampableTrait
     /**
      * @var datetime $updatedAt
      *
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      * @Assert\DateTime()
      */
     private $updatedAt;
@@ -35,7 +35,7 @@ trait TimestampableTrait
     /**
      * @param datetime $createdAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
 
@@ -53,12 +53,25 @@ trait TimestampableTrait
     /**
      * @param datetime $updatedAt
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
+
+//    public function __construct()
+//    {
+//        $this->createdAt =  new \DateTime();
+//        $this->updatedAt = new \DateTime();
+//    }
+//
+//    /**
+//     * @ORM\PreUpdate()
+//     */
+//    public function preUpdate() {
+//        $this->updatedAt = new \DateTime();
+//    }
 
 
 }

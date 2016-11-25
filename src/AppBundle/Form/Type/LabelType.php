@@ -19,7 +19,8 @@ class LabelType extends AbstractType
                 'color',
                 TextType::class,
                 array('attr' => array('class' => 'jscolor'))
-            );
+            )
+            ;
     }
 
     /**

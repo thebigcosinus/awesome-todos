@@ -38,7 +38,7 @@ class TodoController extends Controller
         $translator = $this->translator();
 
         $todo = new Todo();
-
+        
         $form = $this->createForm(TodoType::class, $todo);
 
         $form->handleRequest($request);
@@ -48,6 +48,7 @@ class TodoController extends Controller
             $todo = $form->getData();
             $todo->setCreator($this->getUser());
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($todo);
             $em->flush();
 
@@ -92,6 +93,7 @@ class TodoController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Todo $todo */
             $todo = $form->getData();
+
             
 
             $todo->setUpdatedAt(new \DateTime());

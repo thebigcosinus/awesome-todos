@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class TodoEditType extends AbstractType
@@ -11,7 +12,9 @@ class TodoEditType extends AbstractType
     {
         $pattern = 'c%';
 
-        $builder->remove('category');
+        $builder->remove('category')
+            ->add('is_completed', CheckboxType::class, array('required' => false))
+
         ;
 
     }

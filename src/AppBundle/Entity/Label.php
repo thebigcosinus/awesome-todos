@@ -47,7 +47,7 @@ class Label
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="user_id",referencedColumnName="id",nullable=false)
      */
     private $owner;
     
@@ -88,11 +88,6 @@ class Label
         $this->id = $id;
     }
 
-    public function addTask(Task $task) {
-        if (!$this->tasks->contains($task)) {
-            $this->tasks->add($task);
-        }
-    }
 
     /**
      * @return mixed

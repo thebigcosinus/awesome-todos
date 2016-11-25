@@ -4,17 +4,23 @@
     <h2 class="page-header">{{ "todo.add.title" |trans }}</h2>
     <div class="well">
         {{ form_start(form, {'attr':{'class':''}}) }}
+
+
         {{ form_errors(form) }}
 
         {{ form_row(form.labels) }}
         <a href="#" id="add_label" class="btn btn-default">Ajouter un label</a>
+
+        {{ form_row(form.notes) }}
+        <a href="#" id="add_note" class="btn btn-default">Ajouter une note</a>
         {{ form_widget(form) }}
         {{ form_rest(form) }}
         {{ form_end(form) }}
     </div>
-{%  endblock %}
+{% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('js/todo-create.js') }}"></script>
+    <script src="{{ asset('js/todo-create-label.js') }}"></script>
+    <script src="{{ asset('js/todo-create-note.js') }}"></script>
 {% endblock %}
 
 

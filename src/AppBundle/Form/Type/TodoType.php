@@ -24,19 +24,24 @@ class TodoType extends AbstractType
         $pattern = 'c%';
 
         $builder->add('name', TextType::class)
-           /* ->add('attachments', EntityType::class, array(
-                'class' => 'AppBundle:Attachment'
-            ))*/
+            /* ->add('attachments', EntityType::class, array(
+                 'class' => 'AppBundle:Attachment'
+             ))*/
             //->add('attachments', AttachmentType::class)
-            ->add('category', EntityType::class, array(
-                'class' => 'AppBundle:Category',
-                'multiple' => false,
-                'expanded' => false,
-                'choice_label' => 'display',
-                'query_builder' => function(CategoryRepository $repository) use($pattern) {
-                    return $repository->getLikeQueryBuilder($pattern);
-                }
-            ))
+            ->add(
+                'category',
+                EntityType::class,
+                array(
+                    'class' => 'AppBundle:Category',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'choice_label' => 'display',
+                    'query_builder' => function (CategoryRepository $repository
+                    ) use ($pattern) {
+                        return $repository->getLikeQueryBuilder($pattern);
+                    },
+                )
+            )
             ->add(
                 'description',
                 TextareaType::class,
@@ -56,11 +61,25 @@ class TodoType extends AbstractType
                     ),
                 )
             )
-            ->add('labels', CollectionType::class, array(
-                'entry_type' => LabelType::class,
-                'allow_add' => true,
-                'allow_delete' => true
-            ))
+            ->add(
+                'labels',
+                CollectionType::class,
+                array(
+                    'entry_type' => LabelType::class,
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                )
+            )
+            ->add(
+                'notes',
+                CollectionType::class,
+                array(
+                    'entry_type' => NoteType::class,
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'by_reference' => false
+                )
+            )
             //->add('is_public', CheckboxType::class, array('required' => false))
             ->add('save', SubmitType::class);
 
@@ -68,18 +87,25 @@ class TodoType extends AbstractType
          * Dans un objectif didactique on va tester l utilsiation des evement PRE-SET_DATA
          * Si la tache est marquée comme public on ne pourra plus modifier le champs
          */
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            /** @var Todo $todo */
-            $todo = $event->getData();
-            if (null === $todo) {
-                return;
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) {
+                /** @var Todo $todo */
+                $todo = $event->getData();
+                if (null === $todo) {
+                    return;
+                }
+                if ($todo->getId() === null || $todo->getPublic()) {
+                    $event->getForm()->add(
+                        'public',
+                        CheckboxType::class,
+                        array('required' => false)
+                    );
+                } else {
+                    $event->getForm()->remove('public');
+                }
             }
-            if ($todo->getId() === null || $todo->getPublic()) {
-                $event->getForm()->add('public', CheckboxType::class, array('required' => false));
-            } else {
-                $event->getForm()->remove('public');
-            }
-        });
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)

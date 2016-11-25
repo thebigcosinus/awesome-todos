@@ -66,11 +66,18 @@ class Todo
     private $dueDate;
 
     /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     * @Assert\Type(type="boolean")
+     */
+    private $isCompleted = false;
+
+    /**
      * @var
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      * Entité propriétaire
-     * @Assert\Valid()
+     *
      */
     private $creator;
 
@@ -87,6 +94,13 @@ class Todo
      * @Assert\Valid()
      */
     private $attachments;
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Note", mappedBy="todo", cascade={"persist"})
+     * @Assert\Valid()
+     */
+    private $notes;
 
     /**
      * @return mixed
@@ -114,10 +128,12 @@ class Todo
 
     public function __construct()
     {
+
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
         $this->labels = new ArrayCollection();
         $this->attachments = new ArrayCollection();
+        $this->notes = new ArrayCollection();
         $this->isPublic = false;
     }
 
@@ -182,6 +198,7 @@ class Todo
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -200,7 +217,7 @@ class Todo
      * @param DateTime $dueDate
      * @return Todo
      */
-    public function setDueDate(\DateTime $dueDate)
+    public function setDueDate(\DateTime $dueDate = null)
     {
         $this->dueDate = $dueDate;
 
@@ -214,6 +231,32 @@ class Todo
     public function getDueDate()
     {
         return $this->dueDate;
+    }
+
+    /**
+     * @param Note $note
+     */
+    public function addNote(Note $note)
+    {
+        $this->notes->add($note);
+
+        $note->setTodo($this);
+    }
+
+    /**
+     * @param Note $note
+     */
+    public function removeNote(Note $note)
+    {
+        $this->notes->removeElement($note);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 
     /**
@@ -301,9 +344,59 @@ class Todo
             '#'.implode('|', $forbiddenWords).'#',
             $this->getDescription()
         )) {
-            $context->buildViolation('Contenu invalide car il contient un mot interdit.')
+            $context->buildViolation(
+                'Contenu invalide car il contient un mot interdit.'
+            )
                 ->atPath('description')
                 ->addViolation();
         }
+    }
+
+    /**
+     * Set isCompleted
+     *
+     * @param boolean $isCompleted
+     *
+     * @return Todo
+     */
+    public function setIsCompleted($isCompleted)
+    {
+        $this->isCompleted = $isCompleted;
+
+        return $this;
+    }
+
+    /**
+     * Get isCompleted
+     *
+     * @return boolean
+     */
+    public function getIsCompleted()
+    {
+        return $this->isCompleted;
+    }
+
+    /**
+     * Set isPublic
+     *
+     * @param boolean $isPublic
+     *
+     * @return Todo
+     */
+    public function setIsPublic($isPublic)
+    {
+        $this->isPublic = $isPublic;
+
+        return $this;
+    }
+
+    /**
+     * Get isPublic
+     *
+     * @return boolean
+     */
+    public function getIsPublic()
+    {
+        return $this->isPublic;
     }
 }

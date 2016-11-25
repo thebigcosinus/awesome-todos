@@ -56,3 +56,6 @@ category:
 contact:
     default_message: Entrez votre message ici
 Contact: Contact
+note:
+    notice:
+        added_success: Note ajoutée avec succès
