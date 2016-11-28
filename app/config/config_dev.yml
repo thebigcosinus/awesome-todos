@@ -39,7 +39,8 @@ monolog:
 swiftmailer:
     delivery_address: fabien@gvmail.com
     delivery_whitelist:
-        - '/^fabien.gaubert@gmail\.com$/'
+        - '/^fabien-ovs@gvmail\.fr$/'
+    spool: {type: memory}
 debug:
     max_items: 2500
     max_string_length: -1
