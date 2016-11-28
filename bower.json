@@ -20,6 +20,7 @@
     "symfony-collection": "https://github.com/ninsuo/symfony-collection.git#^2.0.4",
     "bootstrap": "^3.3.7",
     "jquery": "^3.1.1",
-    "bootstrap-datepicker": "^1.6"
+    "bootstrap-datepicker": "^1.6",
+    "jscolor":"https://github.com/jo/JSColor.git"
   }
 }
